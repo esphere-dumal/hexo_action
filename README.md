@@ -1,0 +1,2 @@
+# hexo_action
+使用gitaction实现hexo博客的自动部署
