@@ -1,0 +1,34 @@
+name: 'hexo_action'
+description: '自动部署hexo博客'
+author: 'esphere esphere@qq.com'
+inputs:
+  user_name:
+    description: 'github username'
+    required: true
+    default: 'github_action'
+  user_email:
+    description: 'github user_email'
+    required: true
+    default: 'github_action@github.com'
+  deploy_key:
+    description: 'the deploy key for repo'
+    required: true
+    default: ''
+  commit_msg:
+    description: 'commit messages for repo'
+    required: false
+    default: ''
+outputs:
+    notify:
+      description: 'result of the deploy action'
+runs:
+  using: 'docker'
+  images: 'Dockerfile'
+  args:
+    -${{ inputs.user_name }} 
+    -${{ inputs.user_email }}
+    -${{ inputs.deploy_key }}
+    -${{ inputs.commit_msg }}
+branding:
+  icon: 'droplet'
+  color: 'orange'
