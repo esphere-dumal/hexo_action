@@ -1,0 +1,29 @@
+name: Hexo_deploy
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    name: job to deploy blog
+    steps:
+    -name: Checkout
+     uses: action/checkout@v1
+     with:
+       submodules: true
+
+    -name: Deploy
+     id: deploy
+     uses: esphere-dumal/hexo_action@v1.0.0
+     with:
+       deploy_key: {{ secrets.DEPLOY_KEY }}
+       username: 
+       with:
+         deploy_key: {{ secrets.DEPLOY_KEY }}
+         user_name: <your username>
+         user_email: <your useremail>
+         commit_msg: {{ github.event.head_commit.messaeg }}
+    
+    -name: Result
+     run: |
+      echo "${{ steps.deploy.outputs.notify }}"
